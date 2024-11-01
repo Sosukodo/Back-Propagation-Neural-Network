@@ -74,15 +74,15 @@ for (size_t j = 0; j < Config::HIDENODE; ++j) {
 }
 ```
 
-#### 1.2 隐藏层向输出层传播
+#### 1.2 Propagate from hidden layer to output layer
 
 $$
 \hat{y_k} = \sigma( \sum_j h_j v_{jk} - \lambda_k )
 $$
 
-其中$\hat{y_k}$为第$k$个输出层节点的值（预测值），$h_j$为第$j$个隐藏层节点的值，$v_{jk}$为第$j$个隐藏层节点到第$k$个输出层节点的权重，$\lambda_k$为第$k$个输出层节点的偏置值，$\sigma(x)$为激活函数。
+Where $\hat{y_k}$ is the value (prediction value) of the $k$th output layer node, $h_j$ is the value of the $j$th hidden layer node, $v_{jk}$ is the weight from the $j$th hidden layer node to the $k$th output layer node, $\lambda_k$ is the bias value of the $k$th output layer node, and $\sigma(x)$ is the activation function.
 
-本项目中的代码实现如下：
+The code implementation in this project is as follows:
 
 ```C++
 for (size_t k = 0; k < Config::OUTNODE; ++k) {
@@ -97,17 +97,17 @@ for (size_t k = 0; k < Config::OUTNODE; ++k) {
 }
 ```
 
-### 2. 计算损失函数（Loss Function）
+### 2. Calculating the loss function（Loss Function）
 
-损失函数定义如下：
+The loss function is defined as follows:
 
 $$
 Loss = \frac{1}{2}\sum_k ( y_k - \hat{y_k} )^2
 $$
 
-其中$y_k$为第$k$个输出层节点的目标值（真实值），$\hat{y_k}$为第$k$个输出层节点的值（预测值）。
+Where $y_k$ is the target value (true value) of the $k$th output layer node, and $\hat{y_k}$ is the value (predicted value) of the $k$th output layer node.
 
-本项目中的代码实现如下：
+The code implementation in this project is as follows:
 
 ```C++
 double loss = 0.f;
@@ -118,21 +118,21 @@ for (size_t k = 0; k < Config::OUTNODE; ++k) {
 }
 ```
 
-### 3. Backward（反向传播）
+### 3. Backward（Back Propagation）
 
-利用梯度下降法进行优化。
+Optimization is performed using gradient descent.
 
-#### 3.1 计算$\Delta \lambda_k$（输出层节点偏置值的修正值）
+#### 3.1 Calculate $\Delta \lambda_k$ (corrected value of the output layer node bias value)
 
-其计算公式如下（激活函数为Sigmoid时）：
+The calculation formula is as follows (when the activation function is Sigmoid):
 
 $$
 \Delta \lambda_k = - \eta (y_k - \hat{y_k}) \hat{y_k} (1 - \hat{y_k})
 $$
 
-其中$\eta$为学习率（其余变量上方已出现过不再进行标注）。
+Where $\eta$ is the learning rate (the other variables have already appeared above and are no longer marked).
 
-本项目中的代码实现如下：
+The code implementation in this project is as follows:
 
 ```C++
 for (size_t k = 0; k < Config::OUTNODE; ++k) {
@@ -145,17 +145,17 @@ for (size_t k = 0; k < Config::OUTNODE; ++k) {
 }
 ```
 
-#### 3.2 计算$\Delta v_{jk}$（隐藏层节点到输出层节点权重的修正值）
+#### 3.2 Calculate $\Delta v_{jk}$ (corrected value of the weight from the hidden layer node to the output layer node)
 
-其计算公式如下（激活函数为Sigmoid时）：
+The calculation formula is as follows (when the activation function is Sigmoid):
 
 $$
 \Delta v_{jk} = \eta ( y_k - \hat{y_k} ) \hat{y_k} ( 1 - \hat{y_k} ) h_j
 $$
 
-其中$h_j$为第$j$个隐藏层节点的值（其余变量上方已出现过不再进行标注）。
+Where $h_j$ is the value of the $j$th hidden layer node (the other variables have appeared above and are no longer marked).
 
-本项目中的代码实现如下：
+The code implementation in this project is as follows:
 
 ```C++
 for (size_t j = 0; j < Config::HIDENODE; ++j) {
@@ -171,17 +171,17 @@ for (size_t j = 0; j < Config::HIDENODE; ++j) {
 }
 ```
 
-#### 3.3 计算$\Delta \beta_j$（隐藏层节点偏置值的修正值）
+#### 3.3 Calculate $\Delta \beta_j$ (corrected value of the hidden layer node bias value)
 
-其计算公式如下（激活函数为Sigmoid时）：
+The calculation formula is as follows (when the activation function is Sigmoid):
 
 $$
 \Delta \beta_j = - \eta \sum_k ( y_k - \hat{y_k} ) \hat{y_k} ( 1 - \hat{y_k} ) v_{jk} h_j ( 1 - h_j )
 $$
 
-其中$v_{jk}$为第$j$个隐藏层节点到第$k$个输出层节点的权重（其余变量上方已出现过不再进行标注）。
+Where $v_{jk}$ is the weight from the $j$th hidden layer node to the $k$th output layer node (the other variables have appeared above and are no longer labeled).
 
-本项目中的代码实现如下：
+The code implementation in this project is as follows:
 
 ```C++
 for (size_t j = 0; j < Config::HIDENODE; ++j) {
@@ -201,17 +201,17 @@ for (size_t j = 0; j < Config::HIDENODE; ++j) {
 }
 ```
 
-#### 3.4 计算$\Delta w_{ij}$（输入层节点到隐藏层节点权重的修正值）
+#### 3.4 Calculate $\Delta w_{ij}$ (corrected value of the weight from the input layer node to the hidden layer node)
 
-其计算公式如下（激活函数为Sigmoid时）：
+The calculation formula is as follows (when the activation function is Sigmoid):
 
 $$
 \Delta w_{ij} = \eta \sum_k ( y_k - \hat{y_k} ) \hat{y_k} ( 1 - \hat{y_k} ) v_{jk} h_j ( 1 - h_j ) x_i
 $$
 
-其中$x_i$为第$i$个输入层节点的值（其余变量上方已出现过不再进行标注）。
+Where $x_i$ is the value of the $i$th input layer node (the remaining variables have appeared above and are not labeled here).
 
-本项目中的代码实现如下：
+The code implementation in this project is as follows:
 
 ```C++
 for (size_t i = 0; i < Config::INNODE; ++i) {
