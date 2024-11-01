@@ -2,9 +2,9 @@
 
 [![BPNN](https://badgen.net/badge/github/BPNN?icon&label=GitHub)](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network) [![C++](https://img.shields.io/badge/support-C%2B%2B11%20or%20later-blue?style=flat&logo=cplusplus)](https://github.com/topics/cpp) [![CMake](https://img.shields.io/badge/support-v2.8.12%20or%20later-blue?style=flat&logo=cmake)](https://cmake.org/) [![update](https://img.shields.io/github/last-commit/GavinTechStudio/Back-Propagation-Neural-Network)](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network/commits) [![pages-build-deployment](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network/actions/workflows/pages/pages-build-deployment) 
 
-[本项目](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network)是对项目 [**GavinTechStudio/bpnn_with_cpp**](https://github.com/GavinTechStudio/bpnn_with_cpp) 的代码重构，基于C++实现基础BP神经网络，有助于深入理解BP神经网络原理。
+[This project](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network)It is for the project [**GavinTechStudio/bpnn_with_cpp**](https://github.com/GavinTechStudio/bpnn_with_cpp) The code reconstruction and the implementation of basic BP neural network based on C++ will help to deeply understand the principles of BP neural network.
 
-## 项目结构
+## Project Structure
 
 ```
 .
@@ -21,43 +21,45 @@
 └── main.cpp
 ```
 
-#### 主要框架
+#### Main framework
 
-- Net：网络具体实现
-- Config：网络参数设置
-- Utils：工具类
-  - 数据加载
-  - 激活函数
-- main：网络具体应用
+- Net：Network specific implementation
+- Config：Network parameter settings
+- Utils：Tools
+  - Data loading
+  - Activation Function
+- main：Network specific applications
 
-## 训练原理
+## Training Principles
 
-> 具体公式推导请看视频讲解[彻底搞懂BP神经网络 理论推导+代码实现（C++）](https://www.bilibili.com/video/BV1Y64y1z7jM?p=1)
+> For the specific formula derivation, please watch the video explanation [Completely understand the BP neural network theoretical derivation + code implementation（C++）](https://www.bilibili.com/video/BV1Y64y1z7jM?p=1)
 
-#### 注意：本部分文档包含大量数学公式，由于GitHub markdown不支持数学公式渲染，推荐以下阅读方式：
+#### Note: This part of the document contains a lot of mathematical formulas. Since GitHub markdown does not support mathematical formula rendering, the following reading method is recommended：
 
-1. 如果您使用的是Chrome、Edge、Firefox等浏览器，可以安装插件[MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima)（需要网络能够访问chrome web store）。
-2. 使用[**PDF**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.pdf)的方式进行阅读。
-2. 使用[**预渲染的静态网页**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.html)进行阅读（**推荐**）。
-2. 按`.`键或[点击链接](https://github.dev/GavinTechStudio/Back-Propagation-Neural-Network)进入GitHub在线IDE预览`README.md`文件。
+1. If you are using Chrome, Edge or Firefox You can install plugins for browsers like[MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima)（Requires network access chrome web store）。
+2. Use [**PDF**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.pdf) way to read.
+2. Use [**Pre-rendered static web pages**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.html) Do some reading (**recommended**).
+2. Press the `.` key or [Click on the link](https://github.dev/GavinTechStudio/Back-Propagation-Neural-Network) Enter GitHub online IDE to preview the `README.md` file.
 
-### 0. 神经网络结构图
+### 0. Neural network structure diagram
 
 ![](img/net-info.png)
 
-### 1. Forward（前向传播）
+### 1. Forward（Forward Propagation）
 
-#### 1.1 输入层向隐藏层传播
+#### 1.1 Propagate from the input layer to the hidden layer
 
 $$
 h_j = \sigma( \sum_i x_i w_{ij} - \beta_j )
 $$
 
-其中$h_j$为第$j$个隐藏层节点的值，$x_i$为第$i$个输入层节点的值，$w_{ij}$为第$i$个输入层节点到第$j$个隐藏层节点的权重，$\beta_j$为第$j$个隐藏层节点偏置值，$\sigma(x)$为**Sigmoid**激活函数，后续也将继续用这个表达，其表达式如下
+Where $h_j$ is the value of the $j$th hidden layer node, $x_i$ is the value of the $i$th input layer node, $w_{ij}$ is the weight from the $i$th input layer node to the $j$th hidden layer node, $\beta_j$ is the bias value of the $j$th hidden layer node, and $\sigma(x)$ is the **Sigmoid** activation function. This expression will continue to be used later. The expression is as follows:
+
 $$
 \sigma(x) = \frac{1}{1+e^{-x}}
 $$
-本项目中的代码实现如下：
+
+The code implementation in this project is as follows：
 
 ```C++
 for (size_t j = 0; j < Config::HIDENODE; ++j) {
