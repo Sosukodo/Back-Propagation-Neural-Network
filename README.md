@@ -39,8 +39,8 @@ Google Translated from Chinese to English
 #### Note: This part of the document contains a lot of mathematical formulas. Since GitHub markdown does not support mathematical formula rendering, the following reading method is recommended：
 
 1. If you are using Chrome, Edge or Firefox You can install plugins for browsers like[MathJax Plugin for Github](https://chrome.google.com/webstore/detail/mathjax-plugin-for-github/ioemnmodlmafdkllaclgeombjnmnbima)（Requires network access chrome web store）。
-2. Use [**PDF**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.pdf) way to read.
-2. Use [**Pre-rendered static web pages**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.html) Do some reading (**recommended**).
+2. Use [**PDF**](https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.pdf) (Chinese).
+2. Use Google Translated: [**Pre-rendered static web pages**]([https://gavintechstudio.github.io/Back-Propagation-Neural-Network/README.html](https://gavintechstudio-github-io.translate.goog/Back-Propagation-Neural-Network/README.html?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp)) (**recommended**).
 2. Press the `.` key or [Click on the link](https://github.dev/GavinTechStudio/Back-Propagation-Neural-Network) Enter GitHub online IDE to preview the `README.md` file.
 
 ### 0. Neural network structure diagram
