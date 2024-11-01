@@ -2,6 +2,8 @@
 
 [![BPNN](https://badgen.net/badge/github/BPNN?icon&label=GitHub)](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network) [![C++](https://img.shields.io/badge/support-C%2B%2B11%20or%20later-blue?style=flat&logo=cplusplus)](https://github.com/topics/cpp) [![CMake](https://img.shields.io/badge/support-v2.8.12%20or%20later-blue?style=flat&logo=cmake)](https://cmake.org/) [![update](https://img.shields.io/github/last-commit/GavinTechStudio/Back-Propagation-Neural-Network)](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network/commits) [![pages-build-deployment](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network/actions/workflows/pages/pages-build-deployment) 
 
+Google Translated from Chinese to English
+
 [This project](https://github.com/GavinTechStudio/Back-Propagation-Neural-Network) is for the project [**GavinTechStudio/bpnn_with_cpp**](https://github.com/GavinTechStudio/bpnn_with_cpp) The code reconstruction and the implementation of basic BP neural network based on C++ will help to deeply understand the principles of BP neural network.
 
 ## Project Structure
